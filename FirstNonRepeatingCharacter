@@ -30,3 +30,26 @@ char firstNotRepeatingCharacter(String s) {
         
 
 }
+
+O(1)
+
+char firstNotRepeatingCharacter(String s) {
+    
+  
+    for(char ch:s.toCharArray()){
+        
+        if((s.indexOf(ch) != s.lastIndexOf(ch))){
+            
+        }else{
+            return ch;
+        }
+        
+    }
+    
+    return '_';    
+    
+    
+    
+    
+}
+
