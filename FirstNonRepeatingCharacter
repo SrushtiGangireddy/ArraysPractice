@@ -1,0 +1,32 @@
+char firstNotRepeatingCharacter(String s) {
+    
+    char c=' ';
+    
+    int l=s.length();
+    
+    for(int i=0;i<l;i++){
+        
+        String sub1=s.substring(0,i);
+        String sub2=s.substring(i+1,l);
+        
+        String now=Character.toString(s.charAt(i));
+        
+        String temp=sub1+sub2;
+        
+        if((temp.contains(now))){
+            
+        }else{
+                c=s.charAt(i);
+                break;
+        }
+        
+    }
+    
+        if((c != ' ')){
+                return c;
+        }
+        
+        return '_';
+        
+
+}
