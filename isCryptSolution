@@ -1,0 +1,61 @@
+boolean isCryptSolution(String[] crypt, char[][] solution) {
+    
+    int m=solution.length;
+    int n=solution[0].length;
+    
+    HashMap<String,Integer> code=new HashMap<String,Integer>();
+    
+    for(int i=0;i<m;i++){
+       String key=Character.toString(solution[i][0]);
+       String valueTemp=Character.toString(solution[i][1]);
+       int value=Integer.valueOf(valueTemp);
+        code.put(key,value);
+    }
+    
+    ArrayList<Long> decrypted=new ArrayList<Long>();
+    
+    for(String s:crypt){
+        
+        
+        long sValue=0;
+        
+        String decode="";
+        
+        for(int j=0;j<s.length();j++){
+            
+            String temp=Character.toString(s.charAt(j));
+            int codeValue=code.get(temp);
+            
+            if(decode.length() == 0){
+                if((codeValue == 0) && (j!= s.length()-1)){
+                    return false;
+                }else{
+                    decode=String.valueOf(codeValue);
+                }
+            }else{
+                decode=decode+String.valueOf(codeValue);
+            }   
+            
+        }
+        sValue=Long.valueOf(decode);
+            decrypted.add(sValue);
+        
+    }
+    
+    System.out.println(decrypted);
+    int size=decrypted.size();
+    
+    long sum=0;
+    
+    for(int k=0;k<size-1;k++){
+        sum+=decrypted.get(k);
+    }
+    
+    if(sum == decrypted.get(size-1)){
+        return true;
+    }
+    
+
+    
+    return false;
+}
