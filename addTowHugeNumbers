@@ -1,0 +1,133 @@
+// Definition for singly-linked list:
+// class ListNode<T> {
+//   ListNode(T x) {
+//     value = x;
+//   }
+//   T value;
+//   ListNode<T> next;
+// }
+//
+ListNode<Integer> addTwoHugeNumbers(ListNode<Integer> a, ListNode<Integer> b) {
+    
+    String int1="";
+    String int2="";
+    
+    ArrayList<Integer> al1=new ArrayList<Integer>();
+    ArrayList<Integer> al2=new ArrayList<Integer>();
+    
+    while(true){
+        
+        if(a == null){
+            break;
+        }
+        al1.add(a.value);
+        a=a.next;
+        
+    }
+    
+     while(true){
+        
+        if(b == null){
+            break;
+        }
+        al2.add(b.value);
+        b=b.next;
+        
+    }
+    
+    for(int i=0;i<al1.size();i++){
+        
+        if(i == 0){
+            if(int1.length()==0){
+                int1=String.valueOf(al1.get(i));
+            }else{
+                int1=int1+String.valueOf(al1.get(i));
+            }
+        }else{
+            
+            String temp=String.valueOf(al1.get(i));
+            while(temp.length() < 4){
+                temp="0"+temp;
+            }
+            int1=int1+temp;
+            
+        }
+        
+    }
+    
+    for(int i=0;i<al2.size();i++){
+        
+        if(i == 0){
+            if(int2.length() == 0){
+                int2=String.valueOf(al2.get(i));
+            }else{
+                int2=int2+String.valueOf(al2.get(i));
+            }
+        }else{
+            String temp=String.valueOf(al2.get(i));
+            while(temp.length() < 4){
+                temp="0"+temp;
+            }
+            int2=int2+temp;
+        }
+        
+    }
+   
+    BigInteger aa=new BigInteger(int1);
+    BigInteger bb=new BigInteger(int2);
+    
+    BigInteger cc=aa.add(bb);
+    
+    String c=String.valueOf(cc);
+    
+ //   System.out.println(c);
+ //   System.out.println(c.length());
+    
+    int firstRem=c.length()%4;
+    int nextRem=c.length()-firstRem;
+    
+    ArrayList<String> hugeSum=new ArrayList<String>();
+    
+    String result="";
+    if(firstRem != 0){
+         result=c.substring(0,firstRem);
+        hugeSum.add(result);
+         c=c.substring(firstRem,c.length());
+   //      System.out.println(c);
+    }
+    
+  
+    int parts=nextRem/4;
+    int z=0;
+    while(parts > 0){
+        hugeSum.add((c.substring(z,z+4)));
+        parts--;
+        z=z+4;
+    }
+   
+    ListNode r=null;
+    ListNode t=null;
+    
+    for(int i=hugeSum.size()-1;i>=0;i--){
+        r=t;
+        
+        String part=hugeSum.get(i);
+        System.out.println(part);
+        if(!part.equals("0000") && !part.equals("0")){
+            part = part.replaceFirst ("^0*", "");
+        }else{
+            part="0";
+        }
+    
+        t=new ListNode(Integer.valueOf(part));  
+        t.next=r;
+    }
+    
+    
+    
+   //  System.out.println(hugeSum);
+
+  
+    
+    return t;
+}
