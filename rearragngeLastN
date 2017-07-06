@@ -1,0 +1,42 @@
+// Definition for singly-linked list:
+// class ListNode<T> {
+//   ListNode(T x) {
+//     value = x;
+//   }
+//   T value;
+//   ListNode<T> next;
+// }
+//
+ListNode<Integer> rearrangeLastN(ListNode<Integer> l, int n) {
+    
+    ArrayList<Integer> al=new ArrayList<Integer>();
+    
+    ArrayList<Integer> result=new ArrayList<Integer>();
+    
+    while(true){
+        if(l == null)
+            break;
+        al.add(l.value);
+        l=l.next;
+    }
+    
+    for(int i=al.size()-n;i<al.size();i++){
+        result.add(al.get(i));
+    }
+    
+    for(int i=0;i<al.size()-n;i++){
+        result.add(al.get(i));
+    }
+    
+    ListNode r=null;
+    ListNode t=null;
+    
+    for(int i=result.size()-1;i>=0;i--){
+        r=t;
+        t=new ListNode(result.get(i));
+        t.next=r;
+    }
+    return t;
+
+
+}
