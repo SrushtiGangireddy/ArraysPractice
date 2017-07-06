@@ -1,0 +1,90 @@
+// Definition for singly-linked list:
+// class ListNode<T> {
+//   ListNode(T x) {
+//     value = x;
+//   }
+//   T value;
+//   ListNode<T> next;
+// }
+//
+ListNode<Integer> reverseNodesInKGroups(ListNode<Integer> l, int k) {
+    
+
+    
+    ArrayList<Integer> al=new ArrayList<Integer>();
+    
+    while(true){
+        if(l == null){
+            break;
+        }
+        al.add(l.value);
+        l=l.next;
+    }
+    
+    
+    ArrayList<Integer> result=new ArrayList<Integer>();
+    
+   if(k!=1){
+        
+        int rem=al.size()%k;
+        int len=al.size()-rem;
+        
+        for(int i=0;i<len;){
+            
+            ArrayList<Integer> hold=new ArrayList<Integer>();
+            
+            int temp=k;
+            while(temp > 0){
+                hold.add(al.get(i));
+                i++;
+                temp--;
+            }
+            
+         
+            
+            for(int q=hold.size()-1;q>=0;q--){
+                result.add(hold.get(q));
+            }
+            
+          //     System.out.println(result);
+            
+        }
+        
+        if(rem != 0){
+            
+            for(int i=al.size()-rem;i<al.size();i++){
+                result.add(al.get(i));
+            }
+            
+        }
+        
+          System.out.println(result);
+        
+        
+        ListNode r=null;
+        ListNode t=null;
+        
+        for(int i=result.size()-1;i>=0;i--){
+            
+            r=t;
+            t=new ListNode<Integer>(result.get(i));
+            t.next=r;
+            
+        }
+        
+        return t;
+        
+    }
+    
+    ListNode r=null;
+    ListNode t=null;
+    
+    for(int i=al.size()-1;i>=0;i--){
+        r=t;
+        t=new ListNode(al.get(i));
+        t.next=r;
+    }
+    
+    return t;
+
+}
