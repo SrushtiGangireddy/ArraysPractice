@@ -1,0 +1,56 @@
+boolean areFollowingPatterns(String[] strings, String[] patterns) {
+    
+    int len=strings.length;
+    
+    String temp1="";
+    String temp2="";
+    
+    Hashtable pattern=new Hashtable();
+    
+    for(int i=0;i<len-1;i++){
+        
+        String sa=strings[i];
+        String pa=patterns[i];
+        
+      
+       String sb=strings[i+1];
+       String pb=patterns[i+1];
+        
+        if(pattern.containsKey(pa)){
+            temp1=(String)pattern.get(pa);
+            if(temp1.equals(sa)){
+                
+            }else{
+                return false;
+            }
+        }
+        
+         if(pattern.containsKey(pb)){
+            temp2=(String)pattern.get(pb);
+            if(temp2.equals(sb)){
+                
+            }else{
+                return false;
+            }
+        }
+        
+            
+       if((sa.equals(sb) & (!pa.equals(pb)))){
+         
+           
+           return false;
+       }else if((!sa.equals(sb)) & (pa.equals(pb))){
+           
+           
+           return false;
+       }else{
+           pattern.put(pa,sa);
+       }
+            
+            
+        
+    }
+    
+    return true;
+
+}
