@@ -1,0 +1,27 @@
+boolean containsCloseNums(int[] nums, int k) {
+    
+    int len=nums.length;
+    
+    for(int i=0;i<len;i++){
+        
+        int a=nums[i];
+        
+        for(int j=i+1;j<len;j++){
+            
+            int b=nums[j];
+            
+            if(a == b){
+                
+                if(Math.abs(i-j) <= k){
+                    return true;
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+
+    return false;
+}
