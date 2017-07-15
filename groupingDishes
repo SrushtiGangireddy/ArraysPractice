@@ -1,0 +1,96 @@
+String[][] groupingDishes(String[][] dishes) {
+    
+    int m=dishes.length;
+    Hashtable recipeBook=new Hashtable();
+    
+    ArrayList<ArrayList<String>> recipes=new ArrayList<ArrayList<String>>();
+    
+    ArrayList<String> keys=new ArrayList<String>();
+    
+    for(int i=0;i<m;i++){
+        int n=dishes[i].length;
+        ArrayList<String> temp=new ArrayList<String>();
+        for(int j=0;j<n;j++){
+            if(j != 0 ){
+                recipeBook.put(dishes[i][j],new ArrayList<String>());
+                if(!keys.contains(dishes[i][j])){
+                     keys.add(dishes[i][j]);
+                }
+               
+            }
+           temp.add(dishes[i][j]);
+        }
+        recipes.add(temp);
+    }
+    
+    Iterator it = recipes.iterator();
+    
+    int counter=0;
+    
+    while(it.hasNext()){
+        
+        ArrayList<String> al=(ArrayList<String>)it.next();
+        String item=(String)al.get(0);
+    
+        for(int j=1;j<al.size();j++){
+            
+            ArrayList<String> temp=(ArrayList<String>)recipeBook.get(al.get(j));
+            if(temp.contains(item)){
+                
+            }else{
+                temp.add(item);
+            }
+          
+            Collections.sort(temp);
+            
+        }
+    }
+    Collections.sort(keys);
+  
+    Iterator mapIT=recipeBook.entrySet().iterator();
+    
+    while(mapIT.hasNext()){
+        
+        Map.Entry pair=(Map.Entry)mapIT.next();
+        
+        String key=(String)pair.getKey();
+        ArrayList<String> value=( ArrayList<String>)pair.getValue();
+    //    System.out.println(key);
+        
+     //   System.out.println(value);
+        
+        if(value.size()>=2){
+            counter++;
+        }
+        
+    }
+    
+    
+    String[][] result=new String[counter][];
+    
+    int putC=0;
+    
+    Iterator finalIT=keys.iterator();
+    
+    while(finalIT.hasNext()){
+        
+        String key=(String)finalIT.next();
+        
+        ArrayList<String> value=(ArrayList<String>)recipeBook.get(key);
+        if(value.size() >= 2){
+            
+           String[] recipe=new String[value.size()+1];
+            recipe[0]=key;
+            int z=1;
+            for(int p=0;p<value.size();p++){
+                recipe[z++]=value.get(p);
+            }
+            
+            result[putC++]=recipe;
+        }
+    }
+    
+    System.out.println(counter);
+
+    return result;
+}
