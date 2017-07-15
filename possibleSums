@@ -1,0 +1,72 @@
+int possibleSums(int[] val, int[] quan) {
+    
+    HashSet<Integer> set=new HashSet<Integer>();
+	findSum(val,quan,set,0,0);
+  //  System.out.println(set);
+    return set.size()-1;
+}
+
+private void findSum(int[] val, int[] quan, HashSet<Integer> set, int sum,int ind) {
+		set.add(sum);
+		if(ind>=val.length)	return;
+		for(int i=0;i<=quan[ind];i++){
+			sum+=val[ind]*i;
+			findSum(val, quan, set, sum, ind+1);
+			sum-=val[ind]*i;
+		}
+		
+	}
+
+
+//Brute Force Solution
+
+int possibleSums(int[] coins, int[] quantity) {
+    
+    int sum=0;
+    
+    for(Integer q:quantity){
+        sum+=q;
+    }
+    
+    int[] coin=new int[sum];
+    
+    int place=0;
+    
+    for(int i=0;i<coins.length;i++){
+        
+        int qu=quantity[i];
+        
+        for(int k=0;k<qu;k++){
+            coin[place++]=coins[i];
+        }
+        
+    }
+    
+    
+    
+
+    return calculateSums(coin);
+}
+
+int calculateSums(int[] coins){
+    
+    int n=coins.length;
+    
+    TreeSet<Integer> sums=new TreeSet<Integer>();
+    
+    for(int i=0;i<(1<<n);i++){
+        int sum=0;
+        for(int j=0;j<n;j++){
+            if((i & (1<<j)) > 0){
+              sum+=coins[j];
+            }
+        }
+       if(sum != 0){
+           sums.add(sum);
+       }
+    }
+    
+    return sums.size();
+    
+}
+
